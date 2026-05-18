@@ -63,6 +63,11 @@ contoh milik saya adalah :
 bentuk lain bisa di kostumisasi sesuai keingina seperti __root /dev/nvmeon1p2 dengan /mnt__ dan misal __/dev/nvme0n1p3 dengan /dev/nvme0n1p3 /mnt/home__ 
 user atau anda juga dapat menentukan file swap fungsinya apa ?, itu optional di gunakan jika ram tidak cukup maka file akan menggambil dari partisi disk untuk di swap agar ram tidak penuh 
 
+gunakan mkfs. vfat untuk membuat boot <br> 
+>mkfs.ext4 untuk membuat format dalam bentuk root atau home <br>  
+>mkswap untuk membuat swap <br> 
+
+
 ##### jika anada melakukan dual boot 
 > [1] jika anda melakukan __dual boot__ maka anda wajib untuk mengatur partisi anda terlebih dahulu melalu __WIndows + R  ketik diskmgmt.misc__ <br>
 > [2] setelahnya atur besaran partisi sesuai dengan kebutuhan anda , __unalocated space__ yang anda buat akan di naggap sebagai freespace yang akan di gunakan sebagai partisi baru untuk linuc <br> 
@@ -72,7 +77,7 @@ user atau anda juga dapat menentukan file swap fungsinya apa ?, itu optional di 
 #### jika tidak melakukan dualboot 
 > [1] anda bebas dalam menyesuiakan partisi di dalam sesi ini, menyesuaikan partisi boot,root, dan home untuk partisi anda, tentukan type, setelahnya write baru quit. <br> 
 
-##### membuat format untuk partisi [ mkfs, mkdir , mount , umount ] 
+##### membuat format untuk partisi [ mkfs, mkswaap, mkdir , mount , umount ] 
 
 mkfs. <br> 
 >untuk boot : mkfs.fat -F32 /dev/nama_partisi_untuk _efi /mnt/boot <br> 
@@ -90,6 +95,8 @@ mount sekaligus mkdir <br>
 
 otomatis __membuat direktori dengan mkdir__ dan __mount point__ pada partisi yang ingin di mount pada __/mnt/boot__ dan __/mnt/home__
 
+swapon /dev/nama_partisi_untuk_swap //untuk swap 
+
 ### pacstrap /mnt 
 
 >di gunakan untuk menclone atau mengambil packages penting dari mirror repo archlinux <br> 
@@ -105,18 +112,6 @@ neovim adalah teks editor untuk linux dan iwd adalah sistem network untuk linux
 > __genfstab -U /mnt  >> /mnt/etc/fstab__ 
 
 untuk mengenerated mana dulu yang akan di mount terlebih dahulu setelah bootloader 
-
-### CP network configuration form iwd 
-
-> __mkdir -p mnt/var/lib/iwd__ <br> 
-> __cp /var/lib/iwd/*.psk /mnt/var/lib/iwd/__ <br> 
-
-ini untuk mencopi configrasi iwd yang ada di boot environment sekarang 
-
-### CP network system
-> __cp /etc/systemd/network/* /mnt/systemd/network__ 
-
-ini untuk copi systemd dari network di boot environment sekarang 
 
 ### arch-chroot /mnt 
 untuk masuk ke dalam root sementara alias fake root 
@@ -160,26 +155,36 @@ kita akan menginstall pipewire untuk audio, thunar atau dolphin untuk file manag
 
 tanpa pipewire audio tidak akan berjalan, tanpa dolphin atau thunar kita tidak bisa akses ke file manager, tanpa wofi atau rofi tidak ada exec ke menu atau search bar 
 
-install semuanya menggunakan
->__pacman -S plasma kitty dolphin pipewire pipewire-jack dolphin wofi ttf-jetbrains-mono-nerds firefox-developer-edition__ <br>
+## etential untuk windows dual boot
+>sudo pacman -S os-prober //packages atau dependeciies yang di perlukan untuk mendeteksi dual boot windows <br>
+>nvim /etc/default/grub <br>
+>edit atau uncommenting #GRUB_DISABLE_OS_PROBER=false dan ubah ke GRUB_DISABLE_OS_PROBER=false
 
-## enabke service
+install semuanya menggunakan
+>__pacman -S plasma kitty dolphin pipewire pipewire-jack dolphin wofi ttf-jetbrains-mono-nerds firefox-developer-edition networkmanager__ <br>
+
+## enable service
 > systemctl enable systemd-networkd.socket
 > systemctl enable systemd-resolved
 > systemctl enable iwd.service
 > systemctl enable NetworkManager.service
 > systemctl enable sddm // jika menggunakan sddm
 
-## service troubleshoot
+## service troubleshoot jika eorror // caution it is work form me but further more check arch wiki 
 jika internet sering error atau bertabrakan kemungkinann karena service nya bertabrakan maka enable saja salah satu dari service yang ada 
 systemctl disable iwd.service 
+
+buat iwd berjalan di background dengan cara menconfigurasi network manager agar iwd dan networkmanager tidak bertabrakan 
+> sudo nvim/etc/NetworkManager /conf.d/ wifi-backend.conf <br>
+> masukan [nama dvice] // ambil dari ip link contoh wlan0
+> wifi.backend=iwd
 
 __cd boot/ untuk pindah ke direktori boot__
 
 ## bootloader 
 menggunakan GRUB sebagai bootloader dan mendownload efibootmgr untuk manage uefi 
 > __sudo pacman -S efibootmgr__ //fungsinya untuk mendaftarkan GRUB ke efi bootmgr <br> 
-> __grub-install --target=x86_64-efi --efi-directory=esp --bootloader-id=GRUB__ // untuk menginstall GRUB ke efi dan direktori sebagai bootloader <br>
+> __grub-install --target=x86_64-efi --efi-directory=[tempat boot kamu contoh : /boot] --bootloader-id=Arch__ // untuk menginstall GRUB ke efi dan direktori sebagai bootloader <br>
 > __grub-mkconfig -o /boot/grub/grub.cfg__ // untuk membuat configurasi dari GRUB <br> 
 
 ## mkinitcpio 
