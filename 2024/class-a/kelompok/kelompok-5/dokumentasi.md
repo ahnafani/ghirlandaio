@@ -1,4 +1,4 @@
-
+download ISO Arch Linux berikut linknya
 
 masuk ke live environment
 <img width="4080" height="2296" alt="20260518_123135" src="https://github.com/user-attachments/assets/b99fa777-fffe-40ae-86cf-de6e1e72859e" />
@@ -34,6 +34,7 @@ update system jam
 timedatectl
 ```
 partisi disk
+
 <img width="2296" height="4080" alt="20260518_123652" src="https://github.com/user-attachments/assets/8b34e0ae-ca39-408b-b90c-8efe68b3626a" />
 ```
 cfdisk /dev/sda
