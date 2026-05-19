@@ -82,7 +82,7 @@ KDE Plasma merupakan proyek perangkat lunak yang terdiri dari lingkungan desktop
 
 2. Lalu kemudian akan melakukan installasi KDE Plasma
 
-``` sudo pacman -s xorg plasma plasma-wayland-sesion- kde-applications ```
+``` sudo pacman -S xorg plasma ```
 
 setelah sudah semua, cukup all saja dan default 1, dan yang terakhir y
 
@@ -118,7 +118,7 @@ Dolphin merupakan file manager bawaan KDE yang digunakan untuk mengelola file da
 
 1. Install Dolphin
 
-``` sudo apt install dolphin ``` tunggu hingga installasi selesai 
+``` sudo pacman -S dolphin ``` tunggu hingga installasi selesai 
 
 2. Seletah semuanya selesai buka Doplphin File Manager
    
