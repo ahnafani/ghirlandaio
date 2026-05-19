@@ -65,6 +65,34 @@ dalam  menginstall desktop Arch Linux terdapat beberapa komponen penting yang ha
 ## 2.1 NetworkManager
 NetworkManager adalah program yang digunakan untuk mendeteksi dan mengatur konfigurasi jaringan agar sistem dapat terhubung ke internet secara otomatis, baik melalui jaringan kabel maupun nirkabel. Pada jaringan wireless, NetworkManager dapat memprioritaskan jaringan yang sudah dikenal dan secara otomatis berpindah ke jaringan yang lebih stabil, sedangkan pada jaringan kabel layanan ini akan lebih diprioritaskan dibandingkan koneksi wireless. Selain itu, NetworkManager juga mendukung koneksi modem dan beberapa jenis VPN sehingga memudahkan pengguna dalam mengelola berbagai jenis koneksi jaringan pada sistem Linux.
 
+1. Instalasi NetworkManager menggunakan
+
+   ```
+   sudo pacman -S networkmanager
+   ```
+
+2. Mengaktifkan dan Menjalankan NetworkManager
+
+   ```
+   sudo systemctl enable NetworkManager
+   ```
+
+   ```
+   sudo systemctl start NetworkManager
+   ```
+
+3. Mengecek Status Service
+
+   ```
+   systemctl status NetworkManager
+   ```
+
+   Jika berhasil, maka akan muncul status seperti berikut:
+
+   ```
+   Active: active (running)
+   ```
+
 ## 2.2 Plasma
 Plasma adalah produk unggulan KDE, yang menawarkan lingkungan desktop tersedia yang paling dapat disesuaikan. Komunitas KDE mempunyai sasaran untuk membuatnya sederhana secara baku, dan berdaya ketika dibutuhkan. Plasma dirancang agar mudah digunakan, fitur-fitur yang tersedia di plasma itu seperti : Launcer, System Tray, Notification, Dicover dll. Plasma menawarkan lebih banyak fleksibilitas bagi pengguna yang mungkin ingin mengurangi ukuran instalasi mereka di kemudian hari.  KDE Plasma dikenal sebagai desktop environment yang modern, ringan, dan memiliki tampilan antarmuka yang menarik sehingga banyak digunakan pada sistem Linux desktop. Penjelasan Installasi KDE Plasma:
 
@@ -80,7 +108,7 @@ sudo pacman -Syyu
 sudo pacman -S xorg plasma
 ```
 
-setelah sudah semua, cukup all saja dan default 1, dan yang terakhir y
+   setelah sudah semua, cukup all saja dan default 1, dan yang terakhir y
 
 3. Setela itu aktifkan SDDM, SDDM ini merupakan display manager dari KDE Plasma
 
@@ -88,14 +116,14 @@ setelah sudah semua, cukup all saja dan default 1, dan yang terakhir y
 sudo systemctl enable sddm.service
 ```
 
-Kemudian kita start 
+   Kemudian kita start 
 
 ``` 
 sudo systemctl start sddm.service
 ```
 
 ## 2.3 Pipwire
-PipeWire merupakan kerangka kerja multimedia pada Linux yang digunakan untuk mengelola audio sistem. PipeWire berfungsi menghubungkan aplikasi dengan perangkat audio seperti speaker, headset, dan mikrofon sehingga suara dari aplikasi seperti browser, pemutar musik, game, maupun video dapat diproses dan diputar dengan baik. Selain itu, PipeWire mendukung latency rendah sehingga kualitas dan respons audio menjadi lebih stabil dan cocok digunakan pada desktop Linux modern. 
+PipeWire adalah sistem pengelola audio dan multimedia pada Linux yang digunakan untuk mengatur suara speaker, mikrofon, headset, Bluetooth audio, dan aplikasi multimedia lainnya. PipeWire merupakan pengganti modern untuk PulseAudio dan JACK karena memiliki performa lebih baik, latensi rendah, serta kompatibilitas yang luas. Pada Arch Linux, PipeWire sering digunakan pada desktop environment seperti KDE Plasma dan GNOME untuk mendukung sistem audio yang stabil dan modern.  
 
 1. Instalasi PipeWire menggunakan
 
@@ -103,25 +131,19 @@ PipeWire merupakan kerangka kerja multimedia pada Linux yang digunakan untuk men
    sudo pacman -S pipewire
    ``` 
 
-3. Jika ingin install PipeWire beserta komponen pendukungnya gunakan
+2. Jika ingin install PipeWire beserta komponen pendukungnya gunakan
    
    ``` sudo pacman -S pipewire wireplumber pipewire-pulse pipewire-alsa pipewire-jack ```
 
-4. Setelah instalasi selesai, aktifkan layanan PipeWire, PulseAudio dan WirePlumber.
+3. Setelah instalasi selesai, aktifkan dan jalankan PipeWire, PulseAudio dan WirePlumber.
 
    ```
    systemctl --user enable --now pipewire.service
-   ```
-
-   ```
    systemctl --user enable --now pipewire-pulse.service
+   systemctl --user enable --now wireplumber.service
    ```
 
-   ```
-    systemctl --user enable --now wireplumber.service
-   ```
-
-5. Untuk memastikan PipeWire berjalan dengan baik gunakan
+4. Untuk memastikan PipeWire berjalan dengan baik gunakan
    
    ```
    pactl info
@@ -144,7 +166,7 @@ Dolphin adalah pengelola file bawaan Plasma. Tujuannya adalah untuk meningkatkan
 sudo pacman -S dolphin
 ```
 
-tunggu hingga installasi selesai 
+   tunggu hingga installasi selesai 
 
 2. Seletah semuanya selesai buka Doplphin File Manager
    
@@ -157,7 +179,7 @@ Kitty merupakan emulator terminal berbasis OpenGL yang dapat diprogram dan mendu
    sudo pacman -S kitty
    ```
 
-tunggu hingga installasi selesai 
+   tunggu hingga installasi selesai 
 
 2. Seletah semuanya selesai buka Terminal Kitty.
 
