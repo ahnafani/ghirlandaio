@@ -3,8 +3,10 @@
 
 ## 1. Masuk ke live environtment archlinux
 
-### aselole asasese
+#### BIOS HP
+Pencet esc sampai masuk BIOS, terus F9 untuk ke BOOT MENU.. pilih yg flashdisk
 
 ---
-<img width="498" height="496" alt="femto-griffith" src="https://github.com/user-attachments/assets/7aea08b1-dcd9-4840-bf0f-7b1c6bfec7b5" />
+<img width="4064" height="3048" alt="1  masuk ke arch live environment dgn pencet esc berkali kali" src="https://github.com/user-attachments/assets/686b3947-07bd-4862-9876-1f4119cfa21a" />
+
 ---
