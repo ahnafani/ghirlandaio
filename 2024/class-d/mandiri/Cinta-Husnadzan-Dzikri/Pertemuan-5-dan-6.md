@@ -33,7 +33,7 @@ Step 9: ‘new’
 Step 10: 
 1G untuk boot type efi system
 4G untuk swap, type linux swap
-14H root, type linux filesystem (memo)
+14G root, type linux filesystem (memo)
 
 Step 11: 
 - pencet 'write’
