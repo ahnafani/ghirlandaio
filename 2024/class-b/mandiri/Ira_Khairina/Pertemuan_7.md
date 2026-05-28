@@ -1,5 +1,6 @@
 # HASIL DOKUMENTASI INSTALASI BASE DAN DESKTOP ARCH LINUX PADA LAPTOP LENOVO
 Dokumentasi ini dibuat untuk memenuhi tugas audience pada mata kuliah Perpustakaan dan Arsip Digital
+
 <img width="1600" height="761" alt="WhatsApp Image 2026-05-25 at 1 18 20 PM" src="https://github.com/user-attachments/assets/9c70c68f-dcad-4d09-9eac-dd11ad7960b4" />
 
 <img width="887" height="505" alt="Screenshot (110)" src="https://github.com/user-attachments/assets/7dc5d32d-6b3d-4cde-922b-128360ed15df" />
