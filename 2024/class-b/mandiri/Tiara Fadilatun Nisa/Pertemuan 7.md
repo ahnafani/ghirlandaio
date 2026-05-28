@@ -1,2 +1,1 @@
-# **Dokumentasi Instalasi LInux Arch dan Plasma**
-
+# **Dokumentasi Instalasi Linux Arch dan Plasma**
