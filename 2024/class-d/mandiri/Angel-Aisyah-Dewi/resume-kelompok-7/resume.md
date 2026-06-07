@@ -1,6 +1,5 @@
-##LVM on LUKS vs LUKS on LVM
-
-Dua cara berbeda buat gabungin enkripsi disk (LUKS) sama manajemen volume (LVM). LVM on LUKS: enkrip dulu baru dibagi — cukup satu kunci buat semua. LUKS on LVM: dibagi dulu baru tiap bagian dienkrip sendiri-sendiri — lebih aman tapi lebih ribet.
+## LVM on LUKS vs LUKS on LVM
+Dua cara berbeda buat gabungin enkripsi disk (LUKS) sama manajemen volume (LVM). LVM on LUKS: enkrip dulu baru dibagi — cukup satu kunci buat semua. LUKS on LVM: dibagi dulu baru tiap bagian dienkrip sendiri, jadi lebih aman tapi lebih ribet.
 
 ##KeePassXC dan Secret Service
 KeePassXC buat nyimpen password secara lokal dan aman. Secret Service (GNOME Keyring/KDE Wallet) adalah sistem Linux buat aplikasi ambil kredensial otomatis. Keduanya bisa nyambung, jadi gak perlu masukin password terus-terusan.
