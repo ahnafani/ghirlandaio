@@ -43,9 +43,13 @@ Konfigurasi apache untuk file utama terletak di
 ```
 /etc/httpd/conf/httpd.conf
 ```
-
+https://wiki.archlinux.org/title/Apache_HTTP_Server
 Pastikan MPM Event dan modul berikut aktif:
+
+
 <img width="492" height="126" alt="image" src="https://github.com/user-attachments/assets/60bd6bcf-88d1-497b-b44c-4dd774ebcdc6" />
+
+
 ```
 LoadModule mpm_event_module modules/mod_mpm_event.so
 ```
