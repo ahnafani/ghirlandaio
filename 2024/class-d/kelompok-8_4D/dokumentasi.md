@@ -148,4 +148,16 @@ cp /etc/systemd/network/* /mnt/etc/systemd/network
 ```
 arch-chroot /mnt
 ```
-###
+### Konfigurasi Hostname
+```
+nvim /etc/hostname
+```
+ketik i untuk insert kemudian masukkan nama hostname kalian, klik ESC kemudian ketik :wq untuk keluar
+
+### Set Localtime
+```
+ln -sf /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
+```
+```
+hwclock --systohc
+```
