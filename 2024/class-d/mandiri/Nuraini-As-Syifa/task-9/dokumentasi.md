@@ -46,10 +46,10 @@
 ### 13.Mount Partisi Lain
 ```mount --mkdir -o rw,nodev,nosuid,relatime /dev/proc/vars /mnt/var ```
 ```mount --mkdir -o rw,nodev,nosuid,noexec,relatime /dev/proc/vlog /mnt/var/log```
-```mount --mkdir -o rw,nodev,nosuid,noexec,relatime /dev/system/vaud /mnt/var/log/audit```
-```mount --mkdir -o rw,nodev,nosuid,noexec,relatime /dev/system/vtmp /mnt/var/tmp```
-```mount --mkdir -o rw,nodev,nosuid,noexec,relatime /dev/system/home /mnt/home```
-```mount --mkdir -o rw,nodev,nosuid,noexec,relatime /dev/system/dock /mnt/var/lib/docker```
+```mount --mkdir -o rw,nodev,nosuid,noexec,relatime /dev/proc/vaud /mnt/var/log/audit```
+```mount --mkdir -o rw,nodev,nosuid,noexec,relatime /dev/proc/vtmp /mnt/var/tmp```
+```mount --mkdir -o rw,nodev,nosuid,noexec,relatime /dev/proc/home /mnt/home```
+```mount --mkdir -o rw,nodev,nosuid,noexec,relatime /dev/proc/dock /mnt/var/lib/docker```
 ### 14. Mount EFI Partition
 ```mount --mkdir /dev/nvme0n1p6 /mnt/boot```
 ### 15. Install Paket Dasar Arch
@@ -79,7 +79,7 @@
 ### 26. Konfigurasi Kernel Command Line
 ```mkdir /etc/cmdline.d```
 ```touch /etc/cmdline.d/{01-boot.conf,02-misc.conf}```
-```echo "rd.luks.name=$(blkid -s UUID -o value /dev/nvme0n1p5)=angela root=/dev/system/root" > /etc/cmdline.d/01-boot.conf```
+```echo "rd.luks.name=$(blkid -s UUID -o value /dev/nvme0n1p6)=asyifa root=/dev/proc/root" > /etc/cmdline.d/01-boot.conf```
 ```cat  /etc/cmdline.d/01-boot.conf```
 ### 27. Konfigurasi mkinitcpio
 ```nvim /etc/mkinitcpio.conf```
