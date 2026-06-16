@@ -1,4 +1,4 @@
-# Menginstall OS
+# Menginstall OS Server
 
 ## Menghubungkan ke jaringan wifi
 ```
@@ -105,3 +105,32 @@ mkfs.ext4 /dev[nama grup]/podman
 lsblk
 ```
 ## Mounting
+```
+mount /dev/proc/root /mnt
+```
+```
+mount --mkdir -o uid=0,gid=0,fmask=0077,dmask=0077 /dev/[partisi boot] /mnt/boot
+```
+```
+mount --mkdir -o rw,nodev,nosuid,relatime /dev/[nama grup]/vars /mnt/var
+```
+```
+mount --mkdir -o rw,nodev,nosuid,noexec,relatime /dev/[nama grup]/vtmp /mnt/var/tmp
+```
+```
+mount --mkdir -o rw,nosuid,noexec,relatime /dev/[nama grup]/vlog /mnt/var/log
+```
+```
+mount --mkdir -o rw,nosuid,noexec,relatime /dev/[nama grup]/vaud /mnt/var/log/audit
+```
+```
+mount --mkdir -o rw,nosuid,relatime /dev/nama grup]/home /mnt/home
+```
+```
+mount --mkdir -o rw,nosuid,noexec,relatime /dev/[nama grup]/podman /mnt/var/lib/containers
+```
+##Periksa 
+```
+lsblk
+```
+##Install Package
