@@ -137,7 +137,7 @@ lsblk
 ## Install package yang dibutuhkan
 
 ```
-pacstrap /mnt base intel-ucode linux-lts linux-lts-headers linux-firmware mkinitcpio lvm2 sudo curl neovim iwd firewalld pacman docker
+pacstrap /mnt base intel-ucode linux-lts linux-lts-headers linux-firmware mkinitcpio lvm2 sudo curl neovim iwd firewalld pacman podman
 ```
 
 ## Fstab
