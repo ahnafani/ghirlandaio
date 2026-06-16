@@ -288,3 +288,7 @@ umount -R /mnt
 ```
 reboot
 ```
+
+
+sumber
+| kelompok 8-9 dan kelompok 10 hanya mengganti volume_grup_partisi-docker > volume_grup_podma(containers)
