@@ -2,8 +2,7 @@
 
 ## Menghubungkan ke jaringan wifi
 
-...
 iwctl
-...
+
 station wlan0 get-networks
-...
+
