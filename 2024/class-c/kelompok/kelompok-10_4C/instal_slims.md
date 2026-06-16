@@ -102,7 +102,6 @@ driver = "overlay"
 [storage.options.overlay]
 mount_program = ""
 mountopt = "userxattr"
-registries podman
 ```
 ```
 nvim /etc/containers/registries.conf
