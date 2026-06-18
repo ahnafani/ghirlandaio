@@ -1,14 +1,23 @@
 # Dokumentasi Penginstalan OS Linux untuk Server
-## Nama: Fatma Ramadhani
-## NIM: 12402051050157
-## Mata Kuliah: Perpustakaan dan Arsip Digital
-## Dosen Pengampu: Al Muhdil Karim, S. IP., M.Hum
----
-## Masuk ke Blackbird Amanda
-## Hubungkan ke jaringan internet terlebih dahulu
+## Kelompok 11 Pluto Pioneer
+1. Silvi Nur Aini
+2. Salfa Firyal Hasanah
+3. Fatma Ramadhani
+4. Aditya Pangruwating Dhiyu
+5. Fauzan Azhiimi
+6. Ahmad Hafiz Baihaqi
+
+## Hubungkan ke jaringan internet yang ada
 ```
 iwctl
 ```
+```
+station wlan0 get-networks
+```
+```
+station wlan0 connect (nama_jaringan)
+```
+**ketik password jaringan internetnya**
 ## Mulai rec Asciinema
 ```
 asciinema rec (nama file).cast
@@ -209,4 +218,44 @@ nvim /etc/mkinitcpio.conf
 Klik esc, dan ketik:
 ```
 :wq
+```
+## Selanjutnya kita akan mengkonfigurasi mkinitcpio agar ketika mkinitcpio -P dijalankan tidak terjadi eror
+```
+nvim /etc/mkinitcpio.d/linux-lts.preset
+```
+**nah, dibagian ini kalian bisa sesuaikan aja ya sama foto dibawah ini:**
+<img width="679" height="394" alt="image" src="https://github.com/user-attachments/assets/0f4e7a90-2c13-41d2-8ef2-99afc9e90bf4" />
+## Lalu, kita Install bootctl ya
+```
+bootctl --path=/mnt/boot install
+```
+```
+mkinitcpio -P
+```
+## Setelah itu kita aktifkan
+```
+systemctl enable systemd-networkd
+```
+```
+systemctl enable systemd-resolved
+```
+```
+systemctl enable iwd
+```
+## Selanjutnya kita akan keluar dari Chroot
+```
+exit
+```
+```
+umount -R /mnt
+```
+## Stop rec Asciinema
+**CTRL+D**
+```
+asciinema upload (nama_file).cast
+```
+**Jangan lupa untuk difoto ya link asciinema yang sudah tampil**
+## Langkah Akhir
+```
+reboot
 ```
