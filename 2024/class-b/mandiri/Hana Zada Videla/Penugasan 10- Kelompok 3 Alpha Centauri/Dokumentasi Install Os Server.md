@@ -100,4 +100,10 @@ systemctl enable firewalld
 systemctl enable sshd
 ```
 
-10. Selesai, Exit
+10. Selesai, Exit Chroot
+```
+
+
+exit  
+# keluar dari chroot
+```
