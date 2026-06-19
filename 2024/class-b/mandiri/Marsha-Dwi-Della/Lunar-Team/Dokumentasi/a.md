@@ -1,5 +1,5 @@
 ---
-# Adaptor Firewall & Install Slims
+# Addport Firewall & Install Slims
 
 ## 1. Akses Server & Hak Akses Root
 Langkah pertama adalah masuk ke server target melalui SSH dan beralih ke akun administrator (`root`) untuk mengizinkan eksekusi perintah sistem.
