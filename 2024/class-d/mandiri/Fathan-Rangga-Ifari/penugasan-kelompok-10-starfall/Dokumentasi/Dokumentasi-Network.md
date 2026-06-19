@@ -1,189 +1,157 @@
- Setelah ini fokus khusus ke server 
-Instalasi Podman untuk Cluster Server 
+NETWORK
+Client data itu buat mariadb
+Redis buat cache 
+===
 
-Kalau mau tahu cara baterai di server 
-	cat /sys/class/power_supply/BAT0/capacity || BAT nya beda-beda,  bisa BAT1 
- 
-## Bagian 3 : APLIKASI
+## Bagian 4 : Network 
 
-### 3.1 : SET UP ROOTLESS PODMAN 
+### 4.1 : Tentukan IP
 
-Agar tidak sudo su untuk memakai podman.
-Pertama, aktifkan dulu rekaman.
-```bash
-Asciinema rec [nama].cast 
-```
-#### 1. Masuk ke root dan lakukan pengecekan
+Buka terminal admin > kita tentukan dua user. Satu user admin, satu user operator. 
+IP adress admin, operator, server, wifi (wifi buat sendiri di laptop server)
 
-Masuk ke root
-```bash
-Sudo su
-```
- 
-Verifikasi bahwa ada user dengan subuid 100000:65536
-```bash
-nvim /etc/subuid
-```
+IP adress admin: 199.19.9.7
+IP address operator: 199.19.9.9
+IP address server: 199.19.9.8
+IP address wifi: 199.19.10.1
+IP address gateway: 199.19.9.1
 
-Keluar esc :wq
+### 4.2 FOKUS UNTUK USER ADMIN
+	Useradd -m startop
+	Sudo passwd startop :1234
 
-Verifikasi grup 
-```bash
-nvim /etc/subguid
-```
-
-Keluar
-
-#### 2. Berikan izin kepada podman
+#### 1. BIKIN KONEKSI UNTUK ADMIN
+Mencari interface:
 
 ```bash
-systemctl enable --global podman
+nmcli device status
+sudo nmcli connection add type ethernet if name eno1 con-name ”admin” ipv4.method manual ipv4.adress 199.19.9.7/24 ipv4.gateway 199.19.9.1 ipv4.dns 8.8.8.8
 ```
-
-Exit dari root
-#### 3. Buat Konfigurasi Storage untuk Container 
-
-Membuat direktori untuk folder dalam folder yang hanya ada di user. Untuk membuat hidden folders di linux tinggal ditambahkann titik di sebelumnya. Dijadikan hidden karena berkaitan dengan keamanan.
-
-```bash
-Mkdir -p .config/containers
-```
-
-Lakukan verifikasi 
-```bash
-Ls -la 
-```
-
-Verifikasi untuk semua yang ada di config
-```bash
-ls .config 
-```
-
-Membuat file konfigurasi storage
-```bash
-nvim .config/containers/storage.conf
-```
-
-Isi seperti ini 
-```bash
-[storage]
-driver = “overlay”
-
-[storage.options.overlay]
-mount_program = “”
-mountopt = “userxattr”
-```
-
-#### 4. Menambahkan registry
-
-Untuk menambahkan repository penyimpanan image. Di dalam podman ada beberapa situs untuk mengunduh image, seperti dockerhub,quay,ghcr. 
-```bash
-sudo nvim /etc/containers/registries
-```
- 
-Scroll paling bawah, lalu buat line baru
-```bash
-unqualified-search-registries = [“docker.io”]
-```
-
-Keluar esc :wq
-
-Cek status Podman
-```bash
-	Systemctl status podman
-	Sudo systemctl start podman
-```
-
-Ctrl + d untuk asciinema 
-
-Reboot lalu cek status lagi 
-```bash
-Systemctl status podman
-```
-
-Kalau tidak aktif diulang saja 
-```bash
-Sudo systemctl enable podman
-Systemctl status podman
-Sudo systemctl status podman
-```
-
-### 3.2 : INSTALASI SLIMS DI SERVER TAPI REMOTE OLEH ADMIN
-
-	Asciinema rec [nama].cast 
-Cari ip di server dulu
-	Ip a 
-
-Di keduanya : 
-	Sudo pacman -S openssh
-	Sudo systemctl enable sshd
-	Systemctl start sshd
-
-Di admin : 
-	Ssh [namauserserver]@[ip address server]
-Install podman compose
-Kenapa? Untuk menjalankan container dengan menggunakan file docker compose. buat satuin file-file yang dibutuhkan instalasi slims di satu file. 
-	Sudo pacman -S podman-compose 
-Kalau ditanyain password, masukin password si server
-	Cd .config/containers
-Download link zip yang disiapkan oleh developer slims 
-	Sudo pacman -S wget 
-	‘wget -c https://github.com/slims/docker-compose-for-slims/archive/master.zip’
-Cek apakah master.zip ada atau tidak
-	Ls
-Unzip file
-	Sudo pacman -S unzip
-	unzip master.zip
-Cek lagi 
-	Ls 
-(biru artinya folder)
-Masuk ke folder 
-	Cd docker-compose-for-slims-master
-Cek isinya 
-	Ls 
-Di arch linux ada port, jalur-jalur yang digunakan aplikasi untuk berinteraksi. Batasan untuk user biasa adalah 1024 ke atas, port ke bawahnya digunakan untuk aplikasi-aplikasi krusial. 
 	
-Mengatur bahwa port 80 adalah milik user 
-	Sudo nvim /etc/sysctl.d/99-custom.conf
-Isi seperti di bawah 
-	net.ipv4.ip_unprivileged_port_start=80
+#### 2. BIKIN KONEKSI UNTUK OPERATOR
+```bash
+sudo nmcli connection add type ethernet if name eno1 con-name ”operator” ipv4.method manual ipv4.adress 199.19.9.9/24 ipv4.gateway 199.19.9.1 ipv4.dns 8.8.8.8
+```
+
+#### 3. USER ADMIN OPERATOR
+
+```bash
+	sudo su
+sudo echo
+	echo “nmcli connection up [nama koneksi yang dibuat]” >> /home/[nama user operator]/.bash_profile
+	echo “nmcli connection up [nama koneksi yang dibuat]” >> /home/[nama user operator]/.bash_profile
+```
+
+```bash
+echo “nmcli connection up [nama koneksi yang dibuat]” >> /home/[nama user admin]/.bash_profile
+echo “nmcli connection up [nama koneksi yang dibuat]” >> /home/[nama user admin]/.bash_profile
+cat /home/starfall/.bash
+```
+
+#### 4. SAMBUNGKAN KABEL LAN DARI LAPTOP ADMIN KE LAPTOP SERVER
+(lihat asciinema di laptop admin)
+
+#### 5. SETUP SSH SERVER 
+(lihat asciinema di laptop admin)
+
+```bash
+systemctl stop firewalld
+systemctl restart iwd
+systemctl start firewalld
+```
+
+[di laptop admin]
+```bash
+sudo su 
+[masukkan password] pw: 123
+nvim /etc/systemd/network/20-ethernet [pencet tab aja biar cepet]
+Systemctl restart sytemd-networkd 
+```
+
+[colok kabel lan]
+Cari ip 
+
+```bash
+Ip a
+```
+
+Masuk ke nvim lagi 
+```bash
+nvim /etc/systemd/network/20-ethernet [pencet tab aja biar cepet]
+```
+
+Konfigurasi Set Up Router
+
+```bash
+ssh [namauserserver]@[ip address server]
+sudo su 
+pacman -S hostapd
+nvim /etc/hostapd/hostapd.conf
+```
+
+Search menuju ke line 3200, scroll lagi sampai ke line terbawah. Masuk ke inspection (i)
+Isi : 
+
+```bash
+interface=wlan0
+driver=nl80211
+ssid=jatoh [nama wifi]
+hw_mode=g
+channel=7
+auth_algs=1
+wpa=2
+wpa_passphrase=[password/bintangjatuh]
+wpa_key_mgmt=WPA_PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+```
+
 Keluar esc :wq
-Restart konfigurasi yang dibuat
-	Sudo sysctl --system
-Cek 
-	Ls
-Gunakan file docker-compose-redis.yaml 
-Pada defaultnya baca yang docker compose dulu, jadi harus direname
-	Mv docker-compose.yaml docker-compose.yaml.back
-Ubah docker-compose-redis.yaml menjadi docker-compose.yaml
-	Mv docker-compose-redis.yaml docker-compose.yaml
 
-	Nvim docker-compose.yaml
-Hapus tagar yang terletak di sebelum ports, hapus juga tagar di line setelahnya
-Lalu tambahkan hingga “127.0.0.1:3306:3306”
-Lakukan langkah yang sama di port redis.
-Hapus line yang ada ipv4 || pencet saja esc lalu dd 
-||Shortcut :  kalau mau undo u || kalau copy itu yy || paste p || kalau blok v || 
+Buat file konfigurasi 
 
+```bash
+nvim /etc/systemd/network/02-wireless-ap-network
+```
 
-HAK AKSES WRITE, READ, EXECUTE
-### 3.1 :
-READ ditandai dengan angka (4), WRITE (2), EXECUTE (1) Jadilah 4+2+1 = 7
+Isi :
 
-USER punya akses WRITE, READ, EXECUTE
-GRUP punya akses WRITE, READ, EXECUTE
-OTHERS punya akses WRITE, READ, EXECUTE
+```bash 
+[Match]
+Name=wlan0
 
-sudo chmod -R 777 app/slims
-podman compose up -d
+[Network]
+Address=[ip wifi]
+DHCPServer=yes
+```
+Keluar esc :wq
 
-…
-Sudo Firewall-cmd –zone=public –add-port=80/tcp –permanent
-Sudo Firewall-cmd reload
+Restart systemd-networkd
 
-Lalu masuk ke firefox > masuk ke slims
-Caranya harus tahu masuk ip servernya 
-Buka browser
-http://(ip servernya):80
+```bash
+systemctl restart systemd-networkd
+```
+
+Buat file konfigurasi 
+
+```bash
+Nvim  /etc/sysctl.d/30-ipforward.conf
+```
+
+ISI
+```bash
+net.ipv4.ip_forward=1
+```
+
+Esc: wq
+
+```bash
+Sudo sysctl–system
+Systemctl enable hostapd
+```
+
+Ctrld sampai selesai asciinemanya terus reboot di server
+	
+
 
 
