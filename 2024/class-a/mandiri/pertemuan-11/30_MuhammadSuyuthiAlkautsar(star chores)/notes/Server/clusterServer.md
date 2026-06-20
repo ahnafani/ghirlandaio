@@ -18,3 +18,5 @@ Penggunaan cluster sangat penting agar layanan publik atau situs web tetap stabi
 https://www.youtube.com/watch?v=bwHpD_vOd6A
 
 https://ibertronica.es/blog/en/products/how-to-create-a-server-cluster-for-high-performance-projects/
+
+https://www.ibm.com/docs/en/was-nd/8.5.5?topic=servers-introduction-clusters
