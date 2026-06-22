@@ -1,4 +1,4 @@
-# Install OS Database )Hardened)
+# Install OS Database (Hardened)
 
 
 ## 1. Record
