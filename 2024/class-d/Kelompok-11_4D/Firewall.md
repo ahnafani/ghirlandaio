@@ -53,18 +53,18 @@ firewall-cmd --zone=internal --remove-service={dhcpv6-client,mdns,samba-client,s
    ```
    firewall-cmd --zone=external --remove-service=ssh --permanent
    ```
-   - Reload
+- Reload
      ```
      firewall-cmd --reload
      ```
-## 7. Menhapus SSH pada zone DMZ
-     ```
-     firewall-cmd --zone=dmz --remove-service=ssh --permanent
-     ```
-     - Reload firewall
-       ```
-       firewall-cmd --reload
-       ```
+## 7. Menghapus SSH pada zone DMZ
+```
+firewall-cmd --zone=dmz --remove-service=ssh --permanent
+```
+- Reload firewall
+  ```
+  firewall-cmd --reload
+  ```
 ## 8. Menghapus service pada zone nm-shared
    ```
    firewall-cmd --zone=nm-shared --remove-service={dhcp,dns,ssh} --permanent
