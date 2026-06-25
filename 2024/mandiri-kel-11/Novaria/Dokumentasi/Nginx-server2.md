@@ -15,7 +15,6 @@ pacman -S nginx
 ## Membuat file konfigurasi systemd-networkd
 >Untuk mengatur jaringan ethernet, seperti alamat IP, gateway dan DNS
 ```
-nvim /etc/systemd/20-ethernet.network
 nvim /etc/systemd/network/20-ethernet.network
 ```
 ## Membuka file konfigurasi iwd (ined wireless daemon)
