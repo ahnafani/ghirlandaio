@@ -1,4 +1,4 @@
-# Install Server
+# Install Server Data
 ## 1. Membagi Partisi
 ```bash
 cfdisk /dev/nvme0n1
