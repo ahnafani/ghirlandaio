@@ -78,7 +78,17 @@ lsblk
 ### Menonaktifkan Modul Kernel yang Tidak Diperlukan
 
 ```
-
+lsmod | grep crampfs
+lsmod | grep freevxfs
+lsmod | grep jffs2
+lsmod | grep hfs
+lsmod | grep jfsplus
+lsmod | grep hfsplus
+lsmod | grep squashfs
+lsmod | grep udf
+lsmod | grep usb-storage
+lsmod | grep usb-bluetooth
+```
 
 Edit Konfigurasi Modprobe
 
@@ -86,7 +96,7 @@ Edit Konfigurasi Modprobe
 nvim /etc/modprobe.d/01-custom.conf
 ```
 
-# Isi Konfigurasinya
+### Isi Konfigurasinya
 
 ```
 install bluetooth /bin/false
