@@ -66,6 +66,21 @@ firewall-cmd --reload
 firewall-cmd --list-all-zone
 ```
 
+## Menghapus SSH dari zone External
+```
+firewall-cmd --zone=external --remove-service=ssh --permanent
+```
+
+## Menghapus SSH dari zone DMZ
+```
+firewall-cmd --zone=dmz --remove-service=ssh --permanent
+```
+
+## Reload firewall
+```
+firewall-cmd --reload
+```
+
 
 
 
