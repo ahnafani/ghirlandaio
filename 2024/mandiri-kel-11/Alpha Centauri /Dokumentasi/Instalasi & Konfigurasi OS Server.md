@@ -34,6 +34,7 @@ nvim /etc/mkinitcpio.d/linux-hardened.preset
 
 Isi sesuai:
 
+```
 # mkinitcpio preset file for the 'linux-hardened' package
 
 ALL_config="/etc/mkinitcpio.conf"
