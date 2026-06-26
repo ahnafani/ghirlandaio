@@ -137,7 +137,7 @@ SSID=bila
 Passphrase=bila0201
 
 [IPv4]
-Address=192.168.1.1
+Address=192.168.2.10
 Netmask=255.255.255.0
 ```
 
@@ -146,20 +146,6 @@ Netmask=255.255.255.0
 iwctl
 ap wlan0 start-profile (nama hotspot)
 exit
-```
-
-## Konfigurasi Firewall
-Membuka akses port 8080
-```
-firewall-cmd --permanent --zone=public --add-rich-rule='rule family="ipv4" source address="10.10.1.253/24" port port="8080" protocol="tcp" accept'
-```
-Membuka akses ssh
-```
-firewall-cmd --permanent --zone=public --add-rich-rule='rule family="ipv4" source address="192.168.1.10/24" port port="22" protocol="tcp" accept'
-```
-Menerapkan aturan firewall
-```
-firewall-cmd --reload
 ```
 
 ## Menguji Koneksi ke Host Lain
@@ -171,17 +157,6 @@ ping 10.10.1.253
 ```
 systemctl restart systemd-networkd
 systemctl restart systemd-resolved
-```
-
-## Memeriksa Firewall
-```
-firewall-cmd --list-all-zone
-firewall-cmd --zone=public --list-all
-```
-
-## Mengedit Konfigurasi SLiMS
-```
-nvim /etc/slims.conf
 ```
 
 ## Memeriksa Alamat IP
