@@ -48,7 +48,7 @@ SSID=nginx
 Passphrase=12345678
 
 [IPv4]
-Address=192.168.1.1
+Address=192.168.2.11
 Netmask=255.255.255.0
 ```
 
@@ -59,7 +59,7 @@ iwctl
 device list
 device wlan0 set-property Mode ap
 device list
-ap wlan0 start-profile myhospot
+ap wlan0 start-profile nginx
 exit
 ```
 
