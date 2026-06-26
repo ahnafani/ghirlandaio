@@ -32,3 +32,6 @@ firewall-cmd --list-all-zones
 ```
 exit
 ```
+
+# Pengecekan
+<img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/d3c6d3ef-2491-4dfb-8e25-ec9d7af2a700" />
